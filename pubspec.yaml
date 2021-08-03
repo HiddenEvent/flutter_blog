@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.3.4  # GetX 설정 사용을 위해서!!
+  validators: ^3.0.0 # 유효성 검사 라이브러리
 
 
   # The following adds the Cupertino Icons font to your application.
