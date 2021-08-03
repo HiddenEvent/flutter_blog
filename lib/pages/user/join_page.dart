@@ -6,16 +6,38 @@ class JoinPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              height: 200,
+              child: Text(
+                "회원가입 화면",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            _joinForm(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _joinForm() {
+    return Form(
+      child: Column(
         children: [
-          SizedBox(height: 200),
           CustomTextFormField(hint: "Enter UserName"),
           CustomTextFormField(hint: "Enter Password"),
           CustomTextFormField(hint: "Enter Email"),
-          CustomElevatedButton(text: "회원가입",)
+          CustomElevatedButton(text: "회원가입")
         ],
       ),
     );
   }
 }
-
