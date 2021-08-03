@@ -32,9 +32,9 @@ class JoinPage extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          CustomTextFormField(hint: "Enter UserName"),
-          CustomTextFormField(hint: "Enter Password"),
-          CustomTextFormField(hint: "Enter Email"),
+          CustomTextFormField(hint: "UserName"),
+          CustomTextFormField(hint: "Password"),
+          CustomTextFormField(hint: "Email"),
           CustomElevatedButton(text: "회원가입")
         ],
       ),
