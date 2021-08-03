@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.3.4  # GetX 설정 사용을 위해서!!
 
 
   # The following adds the Cupertino Icons font to your application.
