@@ -3,9 +3,12 @@ import 'package:flutter_blog/pages/components/custom_elevated_button.dart';
 import 'package:flutter_blog/pages/components/custom_text_form_field.dart';
 import 'package:flutter_blog/pages/user/login_page.dart';
 import 'package:get/get.dart';
+import 'package:validators/validators.dart';
 
 class JoinPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>(); /* 글로벌 키를 Form에다 세팅하는 이유는, Form 데이터를 전역에서 접근 가능하게 하기 위함 */
+  final _formKey = GlobalKey<FormState>();
+
+  /* 글로벌 키를 Form에다 세팅하는 이유는, Form 데이터를 전역에서 접근 가능하게 하기 위함 */
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +42,17 @@ class JoinPage extends StatelessWidget {
         children: [
           CustomTextFormField(
               hint: "UserName",
-              funValidator: (value) {
-                print(value);
+              funValidator: (String? value) {
+                if(value!.isEmpty){
+                  return "공벡이 들어갈 수 없습니다.";
+                } else if (!isAlpha(value)) {
+                  return "유저네임에 한글이 들어갈 수 없습니다";
+                } else if (value.length > 12) {
+                  return "유저네임의 길이를 초과하였습니다.";
+                } else {
+                  return null;
+                }
+
               }),
           CustomTextFormField(
               hint: "Password",
@@ -55,8 +67,9 @@ class JoinPage extends StatelessWidget {
           CustomElevatedButton(
             text: "회원가입",
             funPageRoute: () {
-              _formKey.currentState!.validate();
-              Get.to(LoginPage());
+              if(_formKey.currentState!.validate()){
+                Get.to(LoginPage());
+              }
             },
           )
         ],
