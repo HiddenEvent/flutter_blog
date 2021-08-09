@@ -5,14 +5,21 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: _navigation(context),
-      appBar: AppBar(
-
-      ),
-      body: Center(
-        child: Text("Home Page"),
-      ),
-    );
+        drawer: _navigation(context),
+        appBar: AppBar(),
+        body: ListView.separated(
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return ListTile(
+              onTap: () {},
+              title: Text("제목1"),
+              leading: Text("1"),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider();
+          },
+        ));
   }
 
   Widget _navigation(BuildContext context) {
@@ -31,12 +38,10 @@ class HomePage extends StatelessWidget {
                   child: Text(
                     "회원정보보기",
                     style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black54
-                    ),
-                  )
-              ),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54),
+                  )),
               Divider(),
               TextButton(
                   onPressed: () {},
@@ -45,10 +50,8 @@ class HomePage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black54
-                    ),
-                  )
-              ),
+                        color: Colors.black54),
+                  )),
               Divider()
             ],
           ),
