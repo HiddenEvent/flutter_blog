@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/pages/post/detail_page.dart';
 import 'package:flutter_blog/size.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -8,12 +10,14 @@ class HomePage extends StatelessWidget {
         drawer: _navigation(context),
         appBar: AppBar(),
         body: ListView.separated(
-          itemCount: 3,
+          itemCount: 20,
           itemBuilder: (context, index) {
             return ListTile(
-              onTap: () {},
+              onTap: () {
+                Get.to(DetailPage(index), arguments: "arguments 넘길때 사용");
+              },
               title: Text("제목1"),
-              leading: Text("1"),
+              leading: Text(index.toString()),
             );
           },
           separatorBuilder: (context, index) {
