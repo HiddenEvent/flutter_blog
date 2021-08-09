@@ -5,6 +5,9 @@ class UpdatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: Center(
+        child: Text("글수정화면"),
+      ),
     );
   }
 }
