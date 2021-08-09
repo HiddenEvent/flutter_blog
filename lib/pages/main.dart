@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(  /* getX 를 사용하기위해 GetMaterialApp로 감싸줘야한다. */
       debugShowCheckedModeBanner: false,
       // 라우트 설계 필요없음. GetX 사용 예정
-      home: JoinPage(),
+      home: LoginPage(),
     );
   }
 }
