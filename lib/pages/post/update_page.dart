@@ -33,7 +33,7 @@ class UpdatePage extends StatelessWidget {
                     text: "글수정하기",
                     funPageRoute: () {
                       if (_formKey.currentState!.validate()) {
-                        Get.off(DetailPage(1));
+                        Get.back(); // 상태관리 GetX 라이브러리 - Obs
                       }
                     }),
               ],
