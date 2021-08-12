@@ -1,16 +1,18 @@
-# flutter_blog
+# 프로젝트 구조
+- view : ["1. 그림을 그리는 역할"]
+    - __components__ : 공통화 할 컴포넌트 파일 생성 (snake_case)
+    - __page__ : [도메인 폴더]생성후 하위에 CRUD view 파일 생성 (snake_case)
 
-A new Flutter project.
+- controller: ["2. 데이터 전달"]
+    1. [View]에서 데이터 전달 받음
+    2. 데이터를 __Repository__ 전달
+    3. 받은데이터를 [View]로 전달
 
-## Getting Started
+- domain:
+    1. Repository: ["3. 데이터 파싱" (snake_case)]
+        - [controller] => (__ReqDto__) Dart to Json 변환
+        - [Provider] => Json to Dart 변환
+    2. DartEntity(파싱된 데이터를 Json to Dart 변환) (PascalCase)
+    3. Provider: ["4. 서버와 송수신'  (snake_case)]
+        - Repository => req Json, res json (snake_case)
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
