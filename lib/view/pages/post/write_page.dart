@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/pages/components/custom_elevated_button.dart';
-import 'package:flutter_blog/pages/components/custom_text_form_field.dart';
-import 'package:flutter_blog/pages/components/custom_textarea.dart';
-import 'package:flutter_blog/pages/post/detail_page.dart';
 import 'package:flutter_blog/util/validator_util.dart';
+import 'package:flutter_blog/view/components/custom_elevated_button.dart';
+import 'package:flutter_blog/view/components/custom_text_form_field.dart';
+import 'package:flutter_blog/view/components/custom_textarea.dart';
 import 'package:get/get.dart';
 
 import 'home_page.dart';
 
-class UpdatePage extends StatelessWidget {
+class WritePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -22,18 +21,14 @@ class UpdatePage extends StatelessWidget {
             child: ListView(
               children: [
                 CustomTextFormField(
-                    hint: "Title", funValidator: validateTitle(),
-                  value: "제목~1",
-                ),
+                    hint: "Title", funValidator: validateTitle()),
                 CustomTextArea(
-                    hint: "Content", funValidator: validateContent(),
-                  value: "내용~1"*20,
-                ),
+                    hint: "Content", funValidator: validateContent()),
                 CustomElevatedButton(
-                    text: "글수정하기",
+                    text: "글쓰기",
                     funPageRoute: () {
                       if (_formKey.currentState!.validate()) {
-                        Get.back(); // 상태관리 GetX 라이브러리 - Obs
+                        Get.off(HomePage());
                       }
                     }),
               ],
