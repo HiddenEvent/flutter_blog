@@ -8,5 +8,6 @@ class UserController extends GetxController {
   Future<void> login(String username, String password) async {
     String token = await _userRepository.login(username, password);
     jwtToken = token;
+    print(jwtToken);
   }
 }

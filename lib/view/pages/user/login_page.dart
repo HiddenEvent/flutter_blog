@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:flutter_blog/domain/user/user_repository.dart';
 import 'package:flutter_blog/util/validator_util.dart';
 import 'package:flutter_blog/view/components/custom_elevated_button.dart';
@@ -10,6 +11,7 @@ import 'join_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  UserController u = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class LoginPage extends StatelessWidget {
             funPageRoute: () {
               if (_formKey.currentState!.validate()) {
                 // Get.to(HomePage());
+                u.login("ssar", "1234");
               }
             },
           ),
