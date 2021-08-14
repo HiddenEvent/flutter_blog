@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
                 if (token != "-1") {
                   Get.to(HomePage());
                 } else {
-                  print("토큰못받음");
+                  print("토큰못받음 test");
                 }
               }
             },
