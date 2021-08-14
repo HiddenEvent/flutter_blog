@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
-import 'package:flutter_blog/domain/user/user_repository.dart';
 import 'package:flutter_blog/util/validator_util.dart';
 import 'package:flutter_blog/view/components/custom_elevated_button.dart';
 import 'package:flutter_blog/view/components/custom_text_form_field.dart';
@@ -11,7 +10,10 @@ import 'join_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  UserController u = Get.put(UserController());
+  final UserController _userController = Get.put(UserController());
+
+  final _username = TextEditingController();
+  final _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,14 +45,27 @@ class LoginPage extends StatelessWidget {
       key: _formKey,
       child: Column(
         children: [
-          CustomTextFormField(hint: "UserName", funValidator: validateUsername()),
-          CustomTextFormField(hint: "Password", funValidator: validatePassword()),
+          CustomTextFormField(
+            controller: _username,
+            hint: "UserName",
+            funValidator: validateUsername(),
+          ),
+          CustomTextFormField(
+            controller: _password,
+            hint: "Password",
+            funValidator: validatePassword(),
+          ),
           CustomElevatedButton(
             text: "로그인",
-            funPageRoute: () {
+            funPageRoute: () async {
               if (_formKey.currentState!.validate()) {
                 // Get.to(HomePage());
-                u.login("ssar", "1234");
+                String token = await _userController.login(_username.text.trim(), _password.text.trim());
+                if (token != "-1") {
+                  Get.to(HomePage());
+                } else {
+                  print("토큰못받음");
+                }
               }
             },
           ),
