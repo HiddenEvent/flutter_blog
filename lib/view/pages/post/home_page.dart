@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:flutter_blog/size.dart';
 import 'package:flutter_blog/view/pages/post/write_page.dart';
@@ -10,10 +11,13 @@ import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   final UserController _userController = Get.find();
+  final PostController _postController = Get.put(PostController());
+
 
   @override
   Widget build(BuildContext context) {
     // put 없으면 만들고,  있으면 찾는다 (싱글턴으로 관리됨)
+    _postController.findAll();
 
     return Scaffold(
       drawer: _navigation(context),
