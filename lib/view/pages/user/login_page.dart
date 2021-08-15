@@ -10,7 +10,7 @@ import 'join_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final UserController _userController = Get.put(UserController());
+  final _userController = Get.put(UserController());
 
   final _username = TextEditingController();
   final _password = TextEditingController();
@@ -26,7 +26,7 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.center,
               height: 200,
               child: Text(
-                "로그인 페이지",
+                "로그인 페이지 ${_userController.isLogin}",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
