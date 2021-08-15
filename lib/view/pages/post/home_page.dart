@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/user_controller.dart';
+import 'package:flutter_blog/size.dart';
 import 'package:flutter_blog/view/pages/post/write_page.dart';
 import 'package:flutter_blog/view/pages/user/login_page.dart';
 import 'package:flutter_blog/view/pages/user/user_info_page.dart';
-import 'package:flutter_blog/size.dart';
 import 'package:get/get.dart';
 
 import 'detail_page.dart';
@@ -10,9 +11,14 @@ import 'detail_page.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // put 없으면 만들고,  있으면 찾는다 (싱글턴으로 관리됨)
+    UserController userController = Get.find();
+
     return Scaffold(
         drawer: _navigation(context),
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text("${userController.isLogin}"),
+        ),
         body: ListView.separated(
           itemCount: 20,
           itemBuilder: (context, index) {
@@ -47,12 +53,8 @@ class HomePage extends StatelessWidget {
                   },
                   child: Text(
                     "글쓰기",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
-                  )
-              ),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
+                  )),
               Divider(),
               TextButton(
                   onPressed: () {
@@ -60,10 +62,7 @@ class HomePage extends StatelessWidget {
                   },
                   child: Text(
                     "회원정보보기",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
                   )),
               Divider(),
               TextButton(
@@ -72,10 +71,7 @@ class HomePage extends StatelessWidget {
                   },
                   child: Text(
                     "로그아웃",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black54),
                   )),
               Divider()
             ],
