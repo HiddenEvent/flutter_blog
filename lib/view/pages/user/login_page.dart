@@ -62,9 +62,10 @@ class LoginPage extends StatelessWidget {
                 // Get.to(HomePage());
                 String token = await _userController.login(_username.text.trim(), _password.text.trim());
                 if (token != "-1") {
-                  Get.to(HomePage());
+                  Get.to(() => HomePage()); /* 람다식으로 사용해라.. 안그러면 성능 문제 발생*/
                 } else {
-                  print("토큰못받음 test");
+                  Get.snackbar("로그인 시도", "로그인 실패");
+                  // Get.snackbar("로그인 시도", "로그인 실패");
                 }
               }
             },
