@@ -11,27 +11,32 @@ import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
   // put 없으면 만들고,  있으면 찾는다 (싱글턴으로 관리됨)
-  final UserController _userController = Get.find();
+  final UserController userC = Get.find();
+
   // 객체 생성(create), onInit() 함수 실행 initialize)
-  final PostController _postController = Get.put(PostController());
+  final PostController postC = Get.put(PostController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _navigation(context),
       appBar: AppBar(
-        title: Text("${_userController.isLogin}"),
+        title: Text("${userC.isLogin}"),
       ),
       body: Obx(
         () => ListView.separated(
-          itemCount: _postController.posts.length,
+          itemCount: postC.posts.length,
           itemBuilder: (context, index) {
             return ListTile(
               onTap: () {
-                Get.to(DetailPage(index), arguments: "arguments 넘길때 사용");
+                postC.findById(postC.posts[index].id!);
+                Get.to(
+                  () => DetailPage(postC.posts[index].id),
+                  arguments: "arguments 넘길때 사용",
+                );
               },
-              title: Text("${_postController.posts[index].title}"),
-              leading: Text("${_postController.posts[index].id}"),
+              title: Text("${postC.posts[index].title}"),
+              leading: Text("${postC.posts[index].id}"),
             );
           },
           separatorBuilder: (context, index) {
@@ -75,7 +80,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  _userController.logout();
+                  userC.logout();
                   Get.to(LoginPage());
                 },
                 child: Text(
