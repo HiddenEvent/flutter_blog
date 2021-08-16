@@ -21,8 +21,8 @@ class PostRepository {
     if(cmRespDto.code == 1) {
       List<dynamic> temp = cmRespDto.data;
       List<Post> posts = temp.map((post) => Post.fromJson(post)).toList();
-      print(posts.length);
-      print(posts[0].title);
+      // print(posts.length);
+      // print(posts[0].title);
       return posts;
 
     } else {

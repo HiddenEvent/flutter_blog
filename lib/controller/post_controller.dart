@@ -1,12 +1,26 @@
+import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_repository.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get.dart';
+
 
 class PostController extends GetxController {
 
   final PostRepository _postRepository = PostRepository();
+  final posts = <Post>[].obs; /* obs : 값이 변경되면 실시간 반영(관찰)*/
 
-  void findAll() {
-    _postRepository.findAll();
+  @override
+  void onInit() {
+    super.onInit();
+    findAll();
+  }
+
+
+
+
+
+  Future<void> findAll() async {
+    List<Post> posts = await _postRepository.findAll();
+    this.posts.value = posts;
   }
 
 }
