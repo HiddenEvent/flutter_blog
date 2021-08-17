@@ -18,6 +18,7 @@ class DetailPage extends StatelessWidget {
     // String data = Get.arguments; => Getx를 통해 테이터를 받을 떄 사용
     UserController userC = Get.find();
     PostController postC = Get.find();
+    print("로그인 유저아이디 : ${userC.principal.value.id}");
 
     return Scaffold(
       appBar: AppBar(title: Text("게시글 아이디: $id, 로그인 상태 : ${userC.isLogin}")),

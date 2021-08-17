@@ -60,8 +60,8 @@ class LoginPage extends StatelessWidget {
             funPageRoute: () async {
               if (_formKey.currentState!.validate()) {
                 // Get.to(HomePage());
-                String token = await _userController.login(_username.text.trim(), _password.text.trim());
-                if (token != "-1") {
+                int result = await _userController.login(_username.text.trim(), _password.text.trim());
+                if (result == 1) {
                   Get.to(() => HomePage()); /* 람다식으로 사용해라.. 안그러면 성능 문제 발생*/
                 } else {
                   Get.snackbar("로그인 시도", "로그인 실패");
