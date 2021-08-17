@@ -33,6 +33,7 @@ class DetailPage extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
               ),
               Divider(),
+              userC.principal.value.id == postC.post.value.user!.id ?
               Row(
                 children: [
                   ElevatedButton(
@@ -48,7 +49,7 @@ class DetailPage extends StatelessWidget {
                     child: Text("수정"),
                   ),
                 ],
-              ),
+              ) : SizedBox(),
               Expanded(
                 /* 글내용이 엄청 길 경우를 대비해야한다. (스크롤 용도)*/
                 child: SingleChildScrollView(
