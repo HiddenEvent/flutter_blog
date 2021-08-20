@@ -29,6 +29,13 @@ class PostController extends GetxController {
     int result = await _postRepository.deleteById(id);
     if (result == 1) {
       print("서버쪽 삭제 성공");
+      /* 게시글 삭제 => where은 java에서 filter와 같다.*/
+      List<Post> resultlist = posts.where((post) => post.id != id).toList();
+      print(resultlist.length);
+      
+      /* posts 를 삭제후 다시 넣어주면 화면에서 Reload 된다 */
+      posts.value = resultlist;
+      
     }
   }
 }
