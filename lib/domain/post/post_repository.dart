@@ -42,7 +42,14 @@ class PostRepository {
     }else{
       return Post();
     }
-    
+  }
+
+  Future<int> deleteById(int id) async {
+    Response resp = await _postProvider.deleteById(id);
+    dynamic body = resp.body;
+
+    CMRespDto cmRespDto = CMRespDto.fromJson(body);
+    return cmRespDto.code ?? -1;
   }
 
 }

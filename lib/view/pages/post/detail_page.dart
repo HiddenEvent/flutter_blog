@@ -38,7 +38,8 @@ class DetailPage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Get.off(HomePage()); /* 뒤로가기 말고 새로 객체를 만들어서 이동해야한다. 나중에 상태관리로 뺴야하는 작업 */
+                      postC.deleteById(postC.post.value.id!);
+                      Get.off(() => HomePage()); /* 뒤로가기 말고 새로 객체를 만들어서 이동해야한다. 나중에 상태관리로 뺴야하는 작업 */
                     },
                     child: Text("삭제"),
                   ),
