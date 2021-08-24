@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   final String hint;
   final funValidator;
-  final String? value;
   final controller;
 
   /* 텍스트 필드를 넘기기 위해*/
@@ -11,7 +10,6 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     required this.hint,
     required this.funValidator,
-    this.value,
     this.controller,
   });
 
@@ -22,7 +20,6 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         /*null 일수도 있는데 왜  애러가 안날까?*/
         controller: controller,
-        initialValue: value,
         validator: funValidator,
         obscureText: hint == "Password" ? true : false,
         decoration: InputDecoration(

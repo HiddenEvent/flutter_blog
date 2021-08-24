@@ -1,5 +1,6 @@
 import 'package:flutter_blog/controller/dto/CMRespDto.dart';
 import 'package:flutter_blog/controller/dto/LoginReqDto.dart';
+import 'package:flutter_blog/controller/dto/PostUpdateReqDto.dart';
 import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_provider.dart';
 import 'package:flutter_blog/domain/user/user_provider.dart';
@@ -18,13 +19,12 @@ class PostRepository {
     print(cmRespDto.code);
     print(cmRespDto.msg);
     print(cmRespDto.data.runtimeType);
-    if(cmRespDto.code == 1) {
+    if (cmRespDto.code == 1) {
       List<dynamic> temp = cmRespDto.data;
       List<Post> posts = temp.map((post) => Post.fromJson(post)).toList();
       // print(posts.length);
       // print(posts[0].title);
       return posts;
-
     } else {
       // List<Post> hellow = [];
       return <Post>[];
@@ -36,10 +36,10 @@ class PostRepository {
 
     dynamic body = response.body;
     CMRespDto cmRespDto = CMRespDto.fromJson(body);
-    if(cmRespDto.code == 1){
+    if (cmRespDto.code == 1) {
       Post post = Post.fromJson(cmRespDto.data);
       return post;
-    }else{
+    } else {
       return Post();
     }
   }
@@ -50,6 +50,18 @@ class PostRepository {
 
     CMRespDto cmRespDto = CMRespDto.fromJson(body);
     return cmRespDto.code ?? -1;
+  }
+
+  Future<void> updateById(int postId, String title, String content) async {
+    PostUpdateReqDto postUpdateReqDto = PostUpdateReqDto(title, content);
+    Response response = await _postProvider.updateById(postId, postUpdateReqDto.toJson());
+    dynamic body = response.body;
+    CMRespDto cmRespDto = CMRespDto.fromJson(body);
+    if(cmRespDto.code == 1) {
+      print("수정성공");
+    } else {
+      print("수정실패");
+    }
   }
 
 }
