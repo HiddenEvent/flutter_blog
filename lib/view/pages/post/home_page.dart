@@ -10,9 +10,10 @@ import 'package:get/get.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
+  var refreshKey = GlobalKey<RefreshIndicatorState>(); /* 리프레쉬 하기위해 생성 */
+
   // put 없으면 만들고,  있으면 찾는다 (싱글턴으로 관리됨)
   final UserController userC = Get.find();
-
   // 객체 생성(create), onInit() 함수 실행 initialize)
   final PostController postC = Get.put(PostController());
 
@@ -23,25 +24,31 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("${userC.isLogin}"),
       ),
-      body: Obx(
-        () => ListView.separated(
-          itemCount: postC.posts.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              onTap: () async {
-                await postC.findById(postC.posts[index].id!); /*await를 걸어줘야 기다렸다가 그려주게된다*/
-                Get.to(
-                  () => DetailPage(postC.posts[index].id),
-                  arguments: "arguments 넘길때 사용",
-                );
-              },
-              title: Text("${postC.posts[index].title}"),
-              leading: Text("${postC.posts[index].id}"),
-            );
+      body: Obx( /* obx를 Db데이터로 리프레쉬 할수 없다. => getBuilder를 사용해서 DB값으로 리프레쉬 해야한다.*/
+        () => RefreshIndicator( /* 리프레쉬 하기위한 위젯*/
+          key: refreshKey,
+          onRefresh: () async {
+            await postC.findAll();
           },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
+          child: ListView.separated(
+            itemCount: postC.posts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () async {
+                  await postC.findById(postC.posts[index].id!); /*await를 걸어줘야 기다렸다가 그려주게된다*/
+                  Get.to(
+                    () => DetailPage(postC.posts[index].id),
+                    arguments: "arguments 넘길때 사용",
+                  );
+                },
+                title: Text("${postC.posts[index].title}"),
+                leading: Text("${postC.posts[index].id}"),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return Divider();
+            },
+          ),
         ),
       ),
     );
