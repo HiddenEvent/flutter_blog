@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
         () => RefreshIndicator( /* 리프레쉬 하기위한 위젯*/
           key: refreshKey,
           onRefresh: () async {
-            await postC.findAll();
+            await postC.findAll(); /* 리프레쉬 함수... 화면을 아래로 끌어내리면 리프래쉬됨*/
           },
           child: ListView.separated(
             itemCount: postC.posts.length,
