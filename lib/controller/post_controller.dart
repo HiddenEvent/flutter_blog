@@ -40,7 +40,6 @@ class PostController extends GetxController {
   }
   Future<void> updateById(int id, String title, String content) async {
     Post post = await _postRepository.updateById(id, title, content);
-    
     if(post.id != null){
       /* 1. 수정후 상세 페이지 값 변경*/
       this.post.value = post;
@@ -48,7 +47,15 @@ class PostController extends GetxController {
       this.posts.value = this.posts.map((e) => e.id == id ? post : e).toList();
       
     }
-    
+  }
+  Future<void> save(String title, String content) async {
+    print(title);
+    print(content);
+    Post post = await _postRepository.save(title, content);
+    if(post.id != null){
+      /* 1. 리스트에 수정된 상세값 변경*/
+      this.posts.add(post);
+    }
   }
 
 

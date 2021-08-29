@@ -1,8 +1,8 @@
-class PostUpdateReqDto {
+class PostSaveOrUpdateReqDto {
   final String? title;
   final String? content;
 
-  PostUpdateReqDto(
+  PostSaveOrUpdateReqDto(
     this.title,
     this.content,
   );

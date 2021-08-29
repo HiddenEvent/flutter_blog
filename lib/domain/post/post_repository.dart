@@ -1,6 +1,6 @@
 import 'package:flutter_blog/controller/dto/CMRespDto.dart';
 import 'package:flutter_blog/controller/dto/LoginReqDto.dart';
-import 'package:flutter_blog/controller/dto/PostUpdateReqDto.dart';
+import 'package:flutter_blog/controller/dto/PostSaveOrUpdateReqDto.dart';
 import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_provider.dart';
 import 'package:flutter_blog/domain/user/user_provider.dart';
@@ -53,7 +53,7 @@ class PostRepository {
   }
 
   Future<Post> updateById(int postId, String title, String content) async {
-    PostUpdateReqDto postUpdateReqDto = PostUpdateReqDto(title, content);
+    PostSaveOrUpdateReqDto postUpdateReqDto = PostSaveOrUpdateReqDto(title, content);
     Response response = await _postProvider.updateById(postId, postUpdateReqDto.toJson());
     dynamic body = response.body;
     CMRespDto cmRespDto = CMRespDto.fromJson(body);
@@ -64,5 +64,20 @@ class PostRepository {
       return Post();
     }
   }
+  Future<Post> save(String title, String content) async {
+    PostSaveOrUpdateReqDto saveReqDto = PostSaveOrUpdateReqDto(title, content);
+    Response response = await _postProvider.save(saveReqDto.toJson());
+    dynamic body = response.body;
+    CMRespDto cmRespDto = CMRespDto.fromJson(body);
+    if(cmRespDto.code == 1) {
+      print("글쓰기 성공");
+      Post post = Post.fromJson(cmRespDto.data);
+      return post;
+    } else {
+      print("글쓰기 실패");
+      return Post();
+    }
+  }
+
 
 }

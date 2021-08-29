@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 import 'package:flutter_blog/util/validator_util.dart';
 import 'package:flutter_blog/view/components/custom_elevated_button.dart';
 import 'package:flutter_blog/view/components/custom_text_form_field.dart';
@@ -9,6 +10,8 @@ import 'home_page.dart';
 
 class WritePage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
+  final _title = TextEditingController();
+  final _content = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +24,23 @@ class WritePage extends StatelessWidget {
             child: ListView(
               children: [
                 CustomTextFormField(
-                    hint: "Title", funValidator: validateTitle()),
+                  controller: _title,
+                  hint: "Title",
+                  funValidator: validateTitle(),
+                ),
                 CustomTextArea(
-                    hint: "Content", funValidator: validateContent()),
+                  controller: _content,
+                  hint: "Content",
+                  funValidator: validateContent(),
+                ),
                 CustomElevatedButton(
                     text: "글쓰기",
-                    funPageRoute: () {
+                    funPageRoute: () async {
                       if (_formKey.currentState!.validate()) {
-                        Get.off(HomePage());
+                        // 1. 서버에서 데이터 처리 ( 한줄로 컨트롤러 호출하는 방법 사용)
+                        await Get.find<PostController>().save(_title.text, _content.text);
+                        // 2. 페이지이동
+                        Get.off(() => HomePage());
                       }
                     }),
               ],
